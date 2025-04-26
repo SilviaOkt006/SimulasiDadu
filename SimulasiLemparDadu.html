@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Simulasi Lempar Dadu</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f0f8ff;
+    }
+    #dice {
+      width: 150px;
+      height: 150px;
+      margin: 20px auto;
+    }
+    #dice.shake {
+      animation: shake 0.5s;
+    }
+    @keyframes shake {
+      0% { transform: rotate(0deg); }
+      25% { transform: rotate(10deg); }
+      50% { transform: rotate(-10deg); }
+      75% { transform: rotate(10deg); }
+      100% { transform: rotate(0deg); }
+    }
+    button {
+      padding: 12px 24px;
+      font-size: 18px;
+      border-radius: 12px;
+      border: none;
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Kejadian Acak Lempar Dadu 🎲</h1>
+  
+  <!-- Gambar dadu -->
+  <img id="dice" src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Alea_1.png" alt="Dadu">
+  
+  <!-- Tombol untuk melempar dadu -->
+  <div>
+    <button onclick="rollDice()">Lempar Dadu</button>
+  </div>
+
+  <!-- Hasil angka dadu -->
+  <p id="result">Klik tombol untuk mulai!</p>
+
+  <script>
+    // Fungsi untuk melempar dadu
+    function rollDice() {
+      const dice = document.getElementById('dice');
+      const result = document.getElementById('result');
+      dice.classList.add('shake'); // Tambah animasi shake
+
+      // Setelah 0.5 detik, keluarkan angka dan ganti gambar
+      setTimeout(() => {
+        const randomNumber = Math.floor(Math.random() * 6) + 1; // Angka acak 1-6
+        dice.src = `https://upload.wikimedia.org/wikipedia/commons/${getDiceImage(randomNumber)}`;
+        result.textContent = `Dadu menunjukkan angka ${randomNumber}`;
+        dice.classList.remove('shake'); // Hapus animasi setelah selesai
+      }, 500);
+    }
+
+    // Fungsi untuk menentukan gambar berdasarkan angka
+    function getDiceImage(number) {
+      switch (number) {
+        case 1: return "2/2c/Alea_1.png";
+        case 2: return "8/8d/Alea_2.png";
+        case 3: return "2/2c/Alea_3.png";
+        case 4: return "8/8d/Alea_4.png";
+        case 5: return "5/55/Alea_5.png";
+        case 6: return "f/f4/Alea_6.png";
+      }
+    }
+  </script>
+
+</body>
+</html>
